@@ -1,5 +1,7 @@
 import { defineConfig } from "vite";
 
+const base = process.env.VITE_BASE_PATH || "/";
+
 function mockApi() {
   return {
     name: "mock-api",
@@ -54,5 +56,6 @@ function mockApi() {
 }
 
 export default defineConfig({
+  base,
   plugins: [mockApi()],
 });
