@@ -154,8 +154,20 @@
               <h4>Safe action approval</h4>
               <p>Posts to the mock API only. This is here so the demo has a visible approval step.</p>
             </div>
-            <button id="approveBtn" class="ghost">Approve safe action</button>
+            <div class="approval-actions">
+              <button id="exportMemoBtn" class="ghost">Export approval memo</button>
+              <button id="approveBtn" class="ghost">Approve safe action</button>
+            </div>
           </div>
+
+          <div class="section-head section-head-tight">
+            <div>
+              <p class="eyebrow">Change log</p>
+              <h3>Recent actions</h3>
+            </div>
+            <p>Every demo action is surfaced here so the workflow stays auditable.</p>
+          </div>
+          <div id="changeLog" class="changelog"></div>
         </section>
       </main>
     </div>

@@ -2,6 +2,12 @@
 
 A polished, read-only demo app that turns the LinkedIn Campaign Manager role into a single-operator workflow.
 
+> Built entirely by [Codex by OpenAI](https://openai.com/codex) with human oversight.
+
+## Preview
+
+![Campaign Ops Studio preview](./preview.png)
+
 ## What it shows
 
 - campaign queue management
@@ -9,6 +15,7 @@ A polished, read-only demo app that turns the LinkedIn Campaign Manager role int
 - a local Metadata.io MCP stub
 - a human + AI operating model with approval gates
 - mock API routes for demo interactions
+- exportable approval memo and change log
 
 ## Stack
 
@@ -29,6 +36,7 @@ A polished, read-only demo app that turns the LinkedIn Campaign Manager role int
 
 This is intentionally non-destructive.
 The stub never calls live ad platforms.
+Human approval is required before any action that would affect a live environment.
 
 ## Run
 

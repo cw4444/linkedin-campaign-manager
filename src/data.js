@@ -20,3 +20,21 @@ export const brief = {
   window: "4 weeks",
   guardrails: ["No live writes", "Human approval required", "Read-only demo"],
 };
+
+export const changelog = [
+  {
+    time: "09:10",
+    item: "Loaded stakeholder brief",
+    status: "Draft",
+  },
+  {
+    time: "09:14",
+    item: "Applied audience and pacing suggestions",
+    status: "Ready",
+  },
+  {
+    time: "09:18",
+    item: "Queued approval memo",
+    status: "Awaiting sign-off",
+  },
+];

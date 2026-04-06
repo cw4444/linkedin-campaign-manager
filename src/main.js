@@ -1,8 +1,9 @@
-import { brief, campaigns as baseCampaigns, recommendations } from "./data.js";
+import { brief, campaigns as baseCampaigns, changelog as baseChangelog, recommendations } from "./data.js";
 import { buildStubPayload, getMetadataStubLog } from "./mcpStub.js";
 
 const state = {
   campaigns: structuredClone(baseCampaigns),
+  changelog: structuredClone(baseChangelog),
 };
 
 const money = (n) => `$${n.toLocaleString("en-US")}`;
@@ -56,6 +57,16 @@ function render() {
   document.getElementById("pipelineValue").textContent = `$${pipeline}K`;
   document.getElementById("riskValue").textContent = risk;
   document.getElementById("queueMeta").textContent = `${state.campaigns.length} active`;
+
+  const changelogWrap = document.getElementById("changeLog");
+  if (changelogWrap) {
+    changelogWrap.innerHTML = state.changelog
+      .map(
+        (entry) =>
+          `<div class="log-line"><strong>${entry.time}</strong> · ${entry.item}<small>${entry.status}</small></div>`
+      )
+      .join("");
+  }
 }
 
 async function submitBrief() {
@@ -92,6 +103,27 @@ async function approveSafeAction() {
   await fetch("/api/approve", { method: "POST" });
 }
 
+function exportApprovalMemo() {
+  const memo = {
+    title: "Approval memo",
+    generatedAt: new Date().toISOString(),
+    summary: "Safe actions reviewed for the LinkedIn Campaign Manager demo.",
+    approvedChanges: [
+      "Brief ingested",
+      "Audience and pacing suggestions reviewed",
+      "No live platform writes executed",
+    ],
+  };
+
+  const blob = new Blob([JSON.stringify(memo, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "approval-memo.json";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 document.getElementById("refreshBtn").addEventListener("click", render);
 document.getElementById("briefBtn").addEventListener("click", async () => {
   injectBrief();
@@ -99,5 +131,6 @@ document.getElementById("briefBtn").addEventListener("click", async () => {
 });
 
 document.getElementById("approveBtn").addEventListener("click", approveSafeAction);
+document.getElementById("exportMemoBtn").addEventListener("click", exportApprovalMemo);
 
 render();
