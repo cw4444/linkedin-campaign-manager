@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Campaign Ops Studio</title>
+    <meta
+      name="description"
+      content="A read-only LinkedIn campaign operations app with a local Metadata.io MCP stub."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">LinkedIn Campaign Manager · app demo</p>
+          <h1>Campaign Ops Studio</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="refreshBtn" class="ghost">Refresh simulation</button>
+          <button id="briefBtn" class="primary">Load brief</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="hero">
+          <div class="hero-copy">
+            <h2>Run paid LinkedIn campaigns with one operator, one AI sidecar, and explicit approval gates.</h2>
+            <p>
+              This app is designed for demo and workflow design only. The Metadata lane is a local stub that
+              returns simulated recommendations, pacing checks, and audience audits without touching live systems.
+            </p>
+            <div class="hero-grid">
+              <div>
+                <span>Coverage</span>
+                <strong>10-12 campaigns</strong>
+              </div>
+              <div>
+                <span>Budget band</span>
+                <strong>$5K-$50K</strong>
+              </div>
+              <div>
+                <span>Operating model</span>
+                <strong>Human + AI</strong>
+              </div>
+              <div>
+                <span>Integration mode</span>
+                <strong>Stubbed MCP</strong>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-heading">
+              <span>Today pacing</span>
+              <strong id="paceValue">97%</strong>
+            </div>
+            <div class="meter"><span id="paceBar"></span></div>
+            <div class="panel-stack">
+              <div>
+                <span>CTR</span>
+                <strong id="ctrValue">0.92%</strong>
+              </div>
+              <div>
+                <span>CPL</span>
+                <strong id="cplValue">$143</strong>
+              </div>
+              <div>
+                <span>Pipeline</span>
+                <strong id="pipelineValue">$312K</strong>
+              </div>
+              <div>
+                <span>Risk</span>
+                <strong id="riskValue">Low</strong>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="workspace">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Operating surface</p>
+              <h3>Campaign queue and local MCP stub</h3>
+            </div>
+            <p>Daily pacing, campaign notes, and AI recommendations in one audit-friendly view.</p>
+          </div>
+
+          <div class="grid">
+            <article class="lane">
+              <div class="lane-head">
+                <h4>Campaign queue</h4>
+                <span id="queueMeta">12 active</span>
+              </div>
+              <div id="campaignList" class="stack"></div>
+            </article>
+
+            <article class="lane">
+              <div class="lane-head">
+                <h4>Metadata MCP stub</h4>
+                <span>read-only simulation</span>
+              </div>
+              <div id="mcpLog" class="stack mono"></div>
+            </article>
+
+            <article class="lane">
+              <div class="lane-head">
+                <h4>Recommendations</h4>
+                <span>AI draft for human approval</span>
+              </div>
+              <div id="recommendations" class="stack"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="workflow">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Agent direction</p>
+              <h3>How the system is meant to work</h3>
+            </div>
+            <p>Clear separation between the planner, the executor, and the approver.</p>
+          </div>
+
+          <div class="roles">
+            <article>
+              <h4>1. Brief agent</h4>
+              <p>Turns the stakeholder ask into a campaign record with budget, goal, audience, and risk flags.</p>
+            </article>
+            <article>
+              <h4>2. Media agent</h4>
+              <p>Suggests targeting, naming, budget splits, and creative rotation, but never publishes directly.</p>
+            </article>
+            <article>
+              <h4>3. MCP stub</h4>
+              <p>Provides simulated audience checks, pacing signals, and optimization drafts for the app to display.</p>
+            </article>
+            <article>
+              <h4>4. Human approver</h4>
+              <p>Reviews the draft, signs off on the change list, and decides what would be safe to execute live.</p>
+            </article>
+          </div>
+
+          <div class="approval">
+            <div>
+              <p class="eyebrow">Execution gate</p>
+              <h4>Safe action approval</h4>
+              <p>Posts to the mock API only. This is here so the demo has a visible approval step.</p>
+            </div>
+            <button id="approveBtn" class="ghost">Approve safe action</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="campaignTemplate">
+      <div class="campaign">
+        <div class="campaign-top">
+          <div>
+            <strong class="campaign-name"></strong>
+            <p class="campaign-detail"></p>
+          </div>
+          <span class="campaign-status"></span>
+        </div>
+        <div class="campaign-meta">
+          <span class="campaign-budget"></span>
+          <span class="campaign-pacing"></span>
+        </div>
+      </div>
+    </template>
+
+    <template id="recTemplate">
+      <div class="rec">
+        <strong></strong>
+        <p></p>
+      </div>
+    </template>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
